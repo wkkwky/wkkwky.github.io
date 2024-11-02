@@ -42,4 +42,4 @@
 - 邮箱：[yannbao@qq.com](https://mail.qq.com/)
 - CSDN主页：[哇咔咔哇咔的博客](https://blog.csdn.net/qq_67822268)
 ## 赞助
-![赞赏](images/赞赏.jpg "赞赏码")
+![赞助](images/赞助.jpg "赞赏码")
