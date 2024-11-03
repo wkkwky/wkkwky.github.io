@@ -1,58 +1,36 @@
 # 2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）.md
 
 
-
 # **目录**
-
+- [2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）.md](#2024-06-01-笔记sturctured-streaming笔记总结python版md)
+- [**目录**](#目录)
 - [相关资料](#相关资料)
-
-- [一、概述](#一、概述)
-
-    - [1.1 基本概念](#1.1-基本概念)
-
-    - [1.2 两种处理模型](#1.2-两种处理模型)
-      - [（1）微批处理](#（1）微批处理)
-    
-      - [（2）持续处理](#（2）持续处理)
-    
-    
-    - [1.3 Structured Streaming和Spark SQL、Spark Streaming关系](#1.3-Structured Streaming和Spark SQL、Spark Streaming关系)
-
-- [二、编写Structured Streaming程序的基本步骤](#二、编写Structured Streaming程序的基本步骤)
-
-- [三、输入源](#三、输入源)
-
-  - [3.1 File源](#3.1-File源)
-  - [（1）创建程序生成JSON格式的File源测试数据](#（1）创建程序生成JSON格式的File源测试数据)
-    
-  - [（2）创建程序对数据进行统计](#（2）创建程序对数据进行统计)
-    
-  - [（3）测试运行程序](#（3）测试运行程序)
-    
-  - [（4）处理警告](#（4）处理警告)
-    
-  - [（5）总结分析](#（5）总结分析)
-  
-- [3.2 Kafka源](#3.2-Kafka源)
-  - [（1）启动Kafka](#（1）启动Kafka)
-  
-  - [（2）编写生产者（Producer）程序](#（2）编写生产者（Producer）程序)
-  
-  - [（3）安装Python3的Kafka支持](#（3）安装Python3的Kafka支持)
-  
-  - [（4）运行生产者程序](#（4）运行生产者程序)
-  
-  - [（5）编写并运行消费者（Consumer）程序](#（5）编写并运行消费者（Consumer）程序)
-    - [方式一](#方式一)
-    
-    - [方式二](#方式二)
-    
-  - [总结](#总结)
-  
-- [3.3-Socket源](#3.3 Socket源)
-  
-- [3.4-Rate源](#3.4 Rate源)
-
+  - [本文相关代码](#本文相关代码)
+- [一、概述](#一概述)
+  - [1.1 基本概念](#11-基本概念)
+  - [1.2 两种处理模型](#12-两种处理模型)
+    - [（1）微批处理](#1微批处理)
+    - [（2）持续处理](#2持续处理)
+  - [1.3 Structured Streaming和Spark SQL、Spark Streaming关系](#13-structured-streaming和spark-sqlspark-streaming关系)
+- [二、编写Structured Streaming程序的基本步骤](#二编写structured-streaming程序的基本步骤)
+- [三、输入源](#三输入源)
+  - [3.1 File源](#31-file源)
+    - [（1）创建程序生成JSON格式的File源测试数据](#1创建程序生成json格式的file源测试数据)
+    - [（2）创建程序对数据进行统计](#2创建程序对数据进行统计)
+    - [（3）测试运行程序](#3测试运行程序)
+    - [（4）处理警告](#4处理警告)
+    - [（5）总结分析](#5总结分析)
+  - [3.2 Kafka源](#32-kafka源)
+    - [（1）启动Kafka](#1启动kafka)
+    - [（2）编写生产者（Producer）程序](#2编写生产者producer程序)
+    - [（3）安装Python3的Kafka支持](#3安装python3的kafka支持)
+    - [（4）运行生产者程序](#4运行生产者程序)
+    - [（5）编写并运行消费者（Consumer）程序](#5编写并运行消费者consumer程序)
+      - [方式一](#方式一)
+      - [方式二](#方式二)
+    - [总结](#总结)
+  - [3.3 Socket源](#33-socket源)
+  - [3.4 Rate源](#34-rate源)
 ------
 
 
