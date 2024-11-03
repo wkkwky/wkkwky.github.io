@@ -83,11 +83,11 @@ Structured Streaming的关键思想是将实时数据流视为一张正在不断
 
 可以把流计算等同于在一个静态表上的批处理查询，Spark会在不断添加数据的<font color=red>无界输入表</font>上运行计算，并进行增量查询
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89d5876f258f6047008124740891399f9b.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89d5876f258f6047008124740891399f9b.png)
 
 在无界表上对输入的查询将生成结果表，系统每隔一定的周期会触发对<font color=red>无界表</font>的计算并更新结果表
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%890f5792abddf5eb8e3f9103e8412e49c5.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/890f5792abddf5eb8e3f9103e8412e49c5.png)
 
 ## 1.2 两种处理模型
 
@@ -97,7 +97,7 @@ Structured Streaming<font color=red>默认</font>使用微批处理执行模型�
 
 数据到达和得到处理并输出结果之间的延时<font color=＃00FFFF>超过100毫秒</font>
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89574c1d8809c4e9890f6dbeb04d830629.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89574c1d8809c4e9890f6dbeb04d830629.png)
 
 在这里，回答三个问题：
 
@@ -132,7 +132,7 @@ Spark从2.3.0版本开始引入了持续处理的试验性功能，可以实现�
 
 在持续处理模式下，Spark不再根据触发器来周期性启动任务，而是启动一系列的连续读取、处理和写入结果的长时间运行的任务。
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89928f8f52e41e85ba707980a7437ec8fc.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89928f8f52e41e85ba707980a7437ec8fc.png)
 
 为了缩短延迟，引入了新的算法对查询设置检查点，在每个任务的输入数据流中，一个特殊标记的记录被注入。当任务遇到标记时，任务把处理后的最后偏移量[异步](https://www.bilibili.com/video/BV1MC411a7rY/?share_source=copy_web&vd_source=4e01e9db7e3603b44b8d2cfb31455773)（任务的执行不必等待其他任务完成或某个事件发生）地报告给引擎，引擎接收到所有写入接收器的任务的偏移量后，写入预写日志。由于检查点的写入是完全异步的，任务可以持续处理，因此，延迟可以缩短到毫秒级。也正是由于写入是异步的，会导致数据流在故障后可能被处理超过一次以上，所以，持续处理只能做到“至少一次”的一致性。因此，需要注意到，虽然持续处理模型能比微批处理模型获得更好的实时响应性能，但是，这是以牺牲一致性为代价的。微批处理可以保证端到端的完全一致性，而持续处理只能做到“至少一次”的一致性。
 
@@ -217,7 +217,7 @@ if __name__ == "__main__":
     query.awaitTermination()
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89f209fea4fd96dcb6c140f0a4e99f30c0.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89f209fea4fd96dcb6c140f0a4e99f30c0.png)
 
 在执行StructuredNetworkWordCount.py之前，需要启动HDFS：
 
@@ -225,7 +225,7 @@ if __name__ == "__main__":
 start-dfs.sh
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89328eb978cf0a606f27b51b5009a92608.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89328eb978cf0a606f27b51b5009a92608.png)
 
 新建一个终端（记作“数据源终端”），输入如下命令：
 
@@ -242,7 +242,7 @@ spark-submit StructuredNetworkWordCount.py
 
 执行程序后，在“数据源终端”内用键盘不断敲入一行行英文语句，nc程序会把这些数据发送给StructuredNetworkWordCount.py程序进行处理：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89ccb4270dbbd19fd3ffd4ba0bce3e536f.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89ccb4270dbbd19fd3ffd4ba0bce3e536f.png)
 
 输出结果内的Batch后面的数字，说明这是第几个微批处理，系统每隔8秒会启动一次微批处理并输出数据。如果要停止程序的运行，则可以在终端内键入“<font color=red>**Ctrl+C**</font>”来停止。
 
@@ -269,11 +269,11 @@ File 源的[选项](https://spark.apache.org/docs/3.2.0/sql-data-sources.html)�
 >
 > "s3a://a/b/c/dataset.txt"
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%897bb3ff0c2679cbed376808f40db676d8.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/897bb3ff0c2679cbed376808f40db676d8.png)
 
 特定的文件格式也有一些其他特定的选项，具体可以参阅[Spark手册](https://spark.apache.org/docs/3.2.0/index.html)内[DataStreamReader](https://spark.apache.org/docs/3.2.0/api/python/reference/api/pyspark.sql.streaming.DataStreamReader.html#pyspark.sql.streaming.DataStreamReader)中的相关说明：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%890c5e61994b0735b82110427481590cc2.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/890c5e61994b0735b82110427481590cc2.png)
 
 以.csv文件源为例，以下为示例代码：
 
@@ -358,7 +358,7 @@ if __name__ == "__main__":    # 程序的入口，如果作为脚本直接执行
     test_tearDown()                              # 清理测试环境，删除最终目录及其内容
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89c6bac2f6c8c44b25c9646487963c84b6.jpeg)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89c6bac2f6c8c44b25c9646487963c84b6.jpeg)
 
 这段程序首先建立测试环境，清空测试数据所在的目录，接着使用for循环一千次来生成一千个文件，文件名为“e-mall-数字.json”， 文件内容是不超过100行的随机JSON行，行的格式是类似如下：
 
@@ -426,7 +426,7 @@ if __name__ == "__main__":  # 程序入口，如果作为脚本直接执行，�
     query.awaitTermination()  # 等待查询终止
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%898a08cc945490124bd7c359cd2998cbed.jpeg)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/898a08cc945490124bd7c359cd2998cbed.jpeg)
 
 该程序的目的是过滤用户在电子商城里的购买记录，并根据省与地区以1分钟的时间窗口统计各个省与地区的购买量，并按时间排序后输出。
 
@@ -454,19 +454,19 @@ spark-submit b.py
 
 运行程序以后，可以看到类似如下的输出结果：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%892c9714f22ccd8034e6897635daebe84b.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/892c9714f22ccd8034e6897635daebe84b.png)
 
 ### （4）处理警告
 
 如果运行过程中出现警告可忽略，<font color=red>不影响正常运行</font>：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%892c305868ae60a1c189523f69e570cca6.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/892c305868ae60a1c189523f69e570cca6.png)
 
 ------
 
 运行过程中出现如下警告，当然也<font color=red>不影响运行</font>，也可以进行解决：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89941db61980c7ef6d0d058527b189d927.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89941db61980c7ef6d0d058527b189d927.png)
 
 意思就是处理时间触发器的批处理已经开始滞后。具体来说，当前批处理花费的时间超过了触发器设定的时间间隔
 
@@ -479,7 +479,7 @@ spark-submit b.py
 
 上述警告可通过修改b.py代码中'<font color=gree>processingTime</font>'的值，将它改成大于上图中的16341ms即可（1秒=1000毫秒）
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89e2ed9f9145dcca3f2b473db305d3ec0f.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89e2ed9f9145dcca3f2b473db305d3ec0f.png)
 
 ------
 
@@ -487,11 +487,11 @@ spark-submit b.py
 
 将b.py代码中的spark.sparkContext.setLogLevel('WARN')改为spark.sparkContext.setLogLevel('ERROR')即可：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89fa201be6bc94a254cb669cd315240e41.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89fa201be6bc94a254cb669cd315240e41.png)
 
 保存并再次运行可得到干净整洁的结果：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%8909c24413ed490d21425e5b536b2f9718.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/8909c24413ed490d21425e5b536b2f9718.png)
 
 ### （5）总结分析
 
@@ -515,7 +515,7 @@ b.py是一个 PySpark Structured Streaming 应用程序，用于实时处理模�
 - endingOffsets：结束位置偏移量。
 - failOnDataLoss：布尔值，表示是否在Kafka 数据可能丢失时（主题被删除或位置偏移量超出范围等）触发流计算失败。一般应当禁止，以免误报。
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%894917bc37f94a7b4c8c973b783d8dfe4d.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/894917bc37f94a7b4c8c973b783d8dfe4d.png)
 
 实例：使用生产者程序每0.1秒生成一个包含2个字母的单词，并写入Kafka的名称为“wordcount-topic”的主题（Topic）内。Spark的消费者程序通过订阅wordcount-topic，会源源不断收到单词，并且每隔8秒钟对收到的单词进行一次词频统计，把统计结果输出到Kafka的主题wordcount-result-topic内，同时，通过2个监控程序检查Spark处理的输入和输出结果。
 
@@ -535,7 +535,7 @@ cd /usr/local/kafka
 ./bin/kafka-server-start.sh config/server.properties
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89ed1f76281f9725e615b0b9ff5a96a2f1.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89ed1f76281f9725e615b0b9ff5a96a2f1.png)
 
 再新开一个终端（记作“监控输入终端”），执行如下命令监控Kafka收到的文本：
 
@@ -551,7 +551,7 @@ cd /usr/local/kafka
 ./bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic wordcount-result-topic
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89291f74025ac5c95f5b6c373d79bee79e.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89291f74025ac5c95f5b6c373d79bee79e.png)
 
 ### （2）编写生产者（Producer）程序
 
@@ -594,7 +594,7 @@ if __name__ == "__main__":
         time.sleep(0.1)
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%8977fdce276e258b2c905872ec2d32a267.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/8977fdce276e258b2c905872ec2d32a267.png)
 
 ### （3）安装Python3的Kafka支持
 
@@ -612,7 +612,7 @@ sudo apt-get install pip3
 sudo pip3 install kafka-python
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%898604e64ac3ea12540415474f1fab25d1.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/898604e64ac3ea12540415474f1fab25d1.png)
 
 安装完成后可以使用'<font color=red>pip3 list</font>'命令列出当前 Python 环境中已安装的所有 Python 包，查看是否有kafka-python包：
 
@@ -620,7 +620,7 @@ sudo pip3 install kafka-python
 pip3 list
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%895ab19e59eb7cad523041bbb42608c5d7.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/895ab19e59eb7cad523041bbb42608c5d7.png)
 
 可以看到存在kafka-python包，版本为2.0.2
 
@@ -633,7 +633,7 @@ cd /home/hadoop/sparksj/mycode/structured/kafkasource
 python3 spark_ss_kafka_producer.py
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%895340206fa64ad8d1afa416b658fb6352.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/895340206fa64ad8d1afa416b658fb6352.png)
 
 生产者程序执行以后，在“<font color=red>**监控输入终端**</font>”的窗口内就可以看到持续输出包含2个字母的单词。程序会生成随机字符串并将其发送到 Kafka 主题中，主题接收到随机字符串后会展示到终端。
 
@@ -697,7 +697,7 @@ if __name__ == "__main__":
     query.awaitTermination()  # 等待流式查询终止
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%8932aa60e468596d5177226ee6ee53ac65.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/8932aa60e468596d5177226ee6ee53ac65.png)
 
 在运行消费者程序（即spark_ss_kafka_consumer.py）时，请<font color=red>确保kafka成功启动，监控输入终端与监控输出端成功启动，生产者程序成功启动</font>（若采用方式一启动消费者程序则可以等会生产者程序，因为jar包下载可能时间过长，长时间生产者程序会产生大量的数据；若采用方式二启动消费者程序则确保启动消费者程序前启动生产者程序，正如下方视频所示）
 
@@ -713,7 +713,7 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0 spark_s
 
 作用：在运行应用程序时动态下载Kafka相关的依赖包，并将其添加到类路径中，以便应用程序能够访问这些依赖
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%8932a9d71702734d9b62bbc2453d54c970.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/8932a9d71702734d9b62bbc2453d54c970.png)
 
 运行后会解析包依赖并从[Maven中心仓库](https://repo1.maven.org/maven2/)下载所需的JAR包，下载完成后进行运行，但这种方法依赖于自身网络环境，笔者这边因为是校园网，贼慢，故不再展示运行结果
 
@@ -768,13 +768,13 @@ spark-submit --jars "/usr/local/kafka/libs/*:/usr/local/spark/jars/*" spark_ss_k
 
 视频版：
 
-<video src="https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89structuredstreaming-kafka.mp4"></video>
+<video src="https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89structuredstreaming-kafka.mp4"></video>
 
 structured streaming使用kafka源
 
 GIF版：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89aa420ca37f004af35fe44de3ab36ed2e.gif)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89aa420ca37f004af35fe44de3ab36ed2e.gif)
 
 嘿嘿嘿，博主<font color=red>贴心</font>的准备了视频和动图两个版本，读者可按需自取😎
 
@@ -804,7 +804,7 @@ Socket 源的选项（option）包括如下几个：
 - port：端口号，必须设置。
 - includeTimestamp：是否在数据行内包含时间戳。使用时间戳可以用来测试基于时间聚合的功能。
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%8933fcc8f121e22d35aa2b12623ebc56b0.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/8933fcc8f121e22d35aa2b12623ebc56b0.png)
 
 Socket源从一个本地或远程主机的某个端口服务上读取数据，数据的编码为UTF8。因为Socket源使用内存保存读取到的所有数据，并且远端服务不能保证数据在出错后可以使用检查点或者指定当前已处理的偏移量来重放数据，所以，它无法提供端到端的容错保障。Socket源一般<font color=gree>仅用于测试或学习用途</font>。
 
@@ -822,7 +822,7 @@ Rate 源的选项（option）包括如下几个：
 - rampUpTime：生成速度达到rowsPerSecond 需要多少启动时间，使用比秒更精细的粒度将会被截断为整数秒，默认为0秒。
 - numPartitions：使用的分区数，默认为Spark的默认分区数。
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89a4367326af6f2e6879e05ad3ef0b6992.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89a4367326af6f2e6879e05ad3ef0b6992.png)
 
 Rate 源会尽可能地使每秒生成的数据量达到rowsPerSecond，可以通过调整numPartitions以尽快达到所需的速度。这几个参数的作用类似一辆汽车从0加速到100千米/小时并以100千米/小时进行巡航的过程，通过增加“马力”（numPartitions），可以使得加速时间（rampUpTime）更短。
  可以用一小段代码来观察 Rate 源的数据行格式和生成数据的内容。
@@ -866,7 +866,7 @@ if __name__ == "__main__":
     query.awaitTermination()
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%892b94bfb037a5c98162c13c584acad5e2.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/892b94bfb037a5c98162c13c584acad5e2.png)
 
 在Linux终端执行spark_ss_rate.py：
 
@@ -875,7 +875,7 @@ cd /home/hadoop/sparksj/mycode/structured/ratesource
 spark-submit spark_ss_rate.py
 ```
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%89ebb411270275e785188f261618d16d93.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/89ebb411270275e785188f261618d16d93.png)
 
 输出的第一行（即上图红框框住的那一行）StruckType就是print(lines.schema)输出的数据行的格式。
 
@@ -885,9 +885,9 @@ spark-submit spark_ss_rate.py
 
 同[（4）处理警告](#4处理警告)，也可以设置日志输出等级来忽略警告，将spark.sparkContext.setLogLevel('WARN')改为spark.sparkContext.setLogLevel('ERROR')：
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%8951add7792dd73850dbc060ceb04341f3.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/8951add7792dd73850dbc060ceb04341f3.png)
 
 再次执行结果如下，干净整洁~~(❁´◡`❁)~~☆*: .｡. o(≧▽≦)o .｡.:*☆
 
-![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-%E3%80%90%E7%AC%94%E8%AE%B0%E3%80%91Sturctured%20Streaming%E7%AC%94%E8%AE%B0%E6%80%BB%E7%BB%93%EF%BC%88Python%E7%89%88%EF%BC%899eff3e9c2eabeff7fa8492519b314545.png)
+![img](https://github.com/wkkwky/wkkwky.github.io/tree/master/images/2024-06-01-【笔记】Sturctured%20Streaming笔记总结（Python版）/899eff3e9c2eabeff7fa8492519b314545.png)
 
