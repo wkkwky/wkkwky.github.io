@@ -1,4 +1,4 @@
-# 2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）.md
+# 【笔记】Sturctured Streaming笔记总结（Python版）
 
 
 # **目录**
