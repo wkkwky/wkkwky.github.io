@@ -2,8 +2,6 @@
 
 
 # **目录**
-- [2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）.md](#2024-06-01-笔记sturctured-streaming笔记总结python版md)
-- [**目录**](#目录)
 - [相关资料](#相关资料)
   - [本文相关代码](#本文相关代码)
 - [一、概述](#一概述)
@@ -31,6 +29,7 @@
     - [总结](#总结)
   - [3.3 Socket源](#33-socket源)
   - [3.4 Rate源](#34-rate源)
+
 ------
 
 
@@ -59,7 +58,7 @@
 
 本文相关代码读者可以自行下载：
 
-链接：https://pan.baidu.com/s/121zVsgc4muSt9rgCWnJZmw
+链接：[https://pan.baidu.com/s/121zVsgc4muSt9rgCWnJZmw](https://pan.baidu.com/s/121zVsgc4muSt9rgCWnJZmw)
 
 提取码：wkk6
 
@@ -85,7 +84,6 @@ Structured Streaming的关键思想是将实时数据流视为一张正在不断
 可以把流计算等同于在一个静态表上的批处理查询，Spark会在不断添加数据的<font color=red>无界输入表</font>上运行计算，并进行增量查询
 
 ![img](./../images/2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）/d5876f258f6047008124740891399f9b.png)
-
 在无界表上对输入的查询将生成结果表，系统每隔一定的周期会触发对<font color=red>无界表</font>的计算并更新结果表
 
 ![img](./../images/2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）/0f5792abddf5eb8e3f9103e8412e49c5.png)
@@ -731,7 +729,8 @@ spark-submit --packages org.apache.spark:spark-sql-kafka-0-10_2.12:3.2.0 spark_s
 
 若上述网站不能打开，可尝试电脑连接手机热点或使用如下网址进行下载：
 
-链接：https://pan.baidu.com/s/121zVsgc4muSt9rgCWnJZmw 
+链接：[https://pan.baidu.com/s/121zVsgc4muSt9rgCWnJZmw](https://pan.baidu.com/s/121zVsgc4muSt9rgCWnJZmw)
+
 提取码：wkk6
 
 [spark-sql-kafka-0-10_2.12-3.2.0.jar文件下载页面](https://repo1.maven.org/maven2/org/apache/spark/spark-sql-kafka-0-10_2.12/3.2.0/)
@@ -808,7 +807,7 @@ Socket 源的选项（option）包括如下几个：
 
 Socket源从一个本地或远程主机的某个端口服务上读取数据，数据的编码为UTF8。因为Socket源使用内存保存读取到的所有数据，并且远端服务不能保证数据在出错后可以使用检查点或者指定当前已处理的偏移量来重放数据，所以，它无法提供端到端的容错保障。Socket源一般<font color=gree>仅用于测试或学习用途</font>。
 
-实例可参考[二、编写Structured Streaming程序的基本步骤](#二、编写Structured Streaming程序的基本步骤)
+实例可参考[二、编写Structured Streaming程序的基本步骤](#二编写structured-streaming程序的基本步骤)
 
 ## 3.4 Rate源
 
@@ -883,7 +882,7 @@ spark-submit spark_ss_rate.py
 
 ------
 
-同[（4）处理警告](#（4）处理警告)，也可以设置日志输出等级来忽略警告，将spark.sparkContext.setLogLevel('WARN')改为spark.sparkContext.setLogLevel('ERROR')：
+同[（4）处理警告](#4处理警告)，也可以设置日志输出等级来忽略警告，将spark.sparkContext.setLogLevel('WARN')改为spark.sparkContext.setLogLevel('ERROR')：
 
 ![img](./../images/2024-06-01-【笔记】Sturctured Streaming笔记总结（Python版）/51add7792dd73850dbc060ceb04341f3.png)
 
