@@ -1,8 +1,8 @@
-# 欢迎来到我的[博客](wkkwky.github.io)
+# 欢迎来到我的[博客](https://wkkwky.github.io/)
 
 这里是哇咔咔哇咔的技术探索和学习笔记的集合。主要关注编程、大数据、Linux等领域。
 
-[博客地址](wkkwky.github.io "点我进入哇咔咔哇咔的博客")
+[博客地址](https://wkkwky.github.io/ "点我进入哇咔咔哇咔的博客")
 
 ## 技术领域
 
