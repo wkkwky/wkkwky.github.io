@@ -1,4 +1,20 @@
-# About
+# 关于我
 
-This is where you put the contents of your *About* page. Like all your pages, it's in [Markdown](https://guides.github.com/features/mastering-markdown/) format.
+大家好，我是哇咔咔哇咔，一名热爱编程和探索新技术的开发者。我在这个博客上分享我的学习笔记和技术心得，希望能够帮助到同样热爱技术的朋友们。
 
+## 我的目标
+
+通过这个博客，我希望能够：
+
+- 分享我的学习过程和心得
+- 帮助初学者快速入门
+- 与同行交流技术问题
+
+## 联系我
+
+如果你对我的分享感兴趣，或者有任何问题想要讨论，欢迎通过以下方式联系我：
+
+- 邮箱：yannbao@163.com  /  yannbao@qq.com
+- CSDN主页：[https://blog.csdn.net/qq_67822268](https://blog.csdn.net/qq_67822268)
+
+期待与你的交流！

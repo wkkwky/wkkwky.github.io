@@ -1,3 +1,22 @@
-# Your blog
+# 欢迎来到我的博客
 
-This is the repository for your blog! Click *_config.yml* above to get started and fill in the details. Then click *index.md* and edit it to start creating your home page.
+这里是哇咔咔哇咔的技术探索和学习笔记的集合。主要关注编程、大数据、Linux等领域。以下是一些你可能感兴趣的主题：
+
+## 技术领域
+
+- **Python爬虫**
+- **Spark Streaming**
+- **Linux命令与技巧**
+
+## 说明
+
+**本博客只做记录、分享使用！！！**
+
+## 联系方式
+
+如果你有任何问题或想要交流，可以通过以下方式联系我：
+
+- 邮箱：yannbao@163.com  /  yannbao@qq.com
+- CSDN主页：[哇咔咔哇咔](https://blog.csdn.net/qq_67822268)
+
+希望我的分享能对你有所帮助！
