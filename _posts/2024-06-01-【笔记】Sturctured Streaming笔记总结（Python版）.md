@@ -337,7 +337,7 @@ ACTION_DEF = ['login', 'logout', 'purchase']  # 可能的行为
 DISTRICT_DEF = ['fujian', 'beijing', 'shanghai', 'guangzhou']  # 可能的地区
 
 # JSON 行的模板，包含时间、行为和地区
-JSON_LINE_PATTERN = '{{"eventTime": "{}", "action": "{}", "district": "{}"}}\n'
+JSON_LINE_PATTERN = '{"eventTime": "{}", "action": "{}", "district": "{}"}\n'
 
 # 设置测试环境，清空最终目录
 def test_setUp():
