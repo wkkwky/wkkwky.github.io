@@ -14,7 +14,7 @@
 
 如果你对我的分享感兴趣，或者有任何问题想要讨论，欢迎通过以下方式联系我：
 
-- 邮箱：yannbao@163.com  /  yannbao@qq.com
+- 邮箱：yannbao@163.com
 - CSDN主页：[https://blog.csdn.net/qq_67822268](https://blog.csdn.net/qq_67822268)
 
 期待与你的交流！
